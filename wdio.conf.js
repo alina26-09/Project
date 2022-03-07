@@ -2,12 +2,13 @@ var chai = require('chai');
 const video = require('wdio-video-reporter');
 exports.config = {
 
-    suites: {
-
-        LoginTest: [
-            './test/specs/tests/logInTest.js'
-        ],
-    },
+    // suites: {
+    //
+    //     LoginTest: [
+    //         './test/specs/tests/logInTest.js'
+    //     ],
+    // },
+    specs: ['./test/specs/**/logInTest.js'],
     runner: 'local',
     sync: true,
     pageLoadStrategy: 'normal',
@@ -25,9 +26,10 @@ exports.config = {
     reporters: ['spec',
         'dot',
         ['junit', {
-            outputDir: './'
+            outputDir: './report'
         }]],
     services: [['selenium-standalone']],
+
     before: function (capabilities, specs) {
         global.assert = chai.assert;
         browser.url('www.fashiondays.ro')
