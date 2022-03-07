@@ -15,9 +15,6 @@ const productPage = {
     get ProductTitle() {
         return browser.$(`//h1[@class= 'product-brand-desc']`).getTitle()
     },
-    get basketNotification() {
-        return browser.$(`//div[@id = 'basket-notification']`)
-    }
 }
 
 module.exports = productPage

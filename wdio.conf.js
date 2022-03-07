@@ -1,6 +1,5 @@
 var chai = require('chai');
 const video = require('wdio-video-reporter');
-
 exports.config = {
 
     suites: {
@@ -9,37 +8,33 @@ exports.config = {
             './test/specs/tests/logInTest.js'
         ],
     },
-
-    hostname: process.env.HOST,
-    port: parseInt(process.env.PORT),
-    maxInstances: 10,
+    runner: 'local',
+    sync: true,
+    pageLoadStrategy: 'normal',
+    maxInstances: 20,
     capabilities: [{
-        maxInstances: 5,
-        browserName: process.env.BROWSER,
+        maxInstances: 20,
+        browserName: 'chrome'
     }],
     logLevel: 'error',
-    bail: 0,
-    sync: true,
-    coloredLogs: true,
-    waitforTimeout: 10000,
-    connectionRetryTimeout: 10000,
-    connectionRetryCount: 1,
+    deprecationWarnings: true,
+    waitForTimeout: 200000,
+    connectionRetryTimeout: 800000,
+    connectionRetryCount: 3,
     framework: 'mocha',
     reporters: ['spec',
-        [video, {
-            saveAllVideos: true,
-            videoSlowdownMultiplier: 10,
-        }],],
-    mochaOpts: {
-        ui: 'bdd',
-        timeout: 60000
-    },
-
+        'dot',
+        ['junit', {
+            outputDir: './'
+        }]],
+    services: [['selenium-standalone']],
     before: function (capabilities, specs) {
         global.assert = chai.assert;
-        browser.url("www.emag.com")
-        browser.setWindowSize(1900,  1080)
-        browser.deleteAllCookies()
-
+        browser.url('www.fashiondays.ro')
+        browser.setWindowSize(1920, 1080)
+        browser.pause(5000)
+    },
+    mochaOpts: {
+        timeout: 99999999
     }
 }
