@@ -57,6 +57,8 @@ describe('start the flow', () => {
         assert.equal(beforeC + 1,  actualValue)
     })
 
+    // testing jenkins
+
     after(function () {
         if (this.currentTest.state === 'failed')
             browser.saveScreenshot(`./test/target/${Date.now()}.png`);
