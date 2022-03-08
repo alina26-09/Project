@@ -3,11 +3,17 @@ const productPage = {
     get SizeTab(){
         return browser.$(`//div[@id='dropdown-wrapper']`)
     },
-    Size: function(sizeNumber){
-        return browser.$(`//div[@class='short po-markup ']`)
+    get SizeWomen(){
+        return browser.$(`//div[@id='sizeContainer']/div[@class='short po-markup '][1]`)
+    },
+    get SizeBoys(){
+        return browser.$(`//div[@id='sizeContainer']/div[@class='long po-markup '][1]`)
     },
     get BuyBox(){
         return browser.$(`//button[@id='buy-box']`)
+    },
+    get SizeContainer(){
+        return browser.$(`//div[@id='sizeContainer']`)
     },
     get WishlistBox(){
         return browser.$(`//button[@id='add-wishlist-box']`)

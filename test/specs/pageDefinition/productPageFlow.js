@@ -1,12 +1,17 @@
 const productPage = require('../pagesComponents/productPage')
 
- function selectSize(size) {
+ function selectSize(gender) {
      productPage.SizeTab.scrollIntoView()
      productPage.SizeTab.waitForClickable(2000)
      productPage.SizeTab.click()
-     let elem = productPage.Size(size)
-     elem.waitForDisplayed(3000)
-     elem.click()
+     browser.pause(1000)
+     productPage.SizeContainer.waitForDisplayed(2000)
+     if(gender === 'Girls') {
+         productPage.SizeWomen.click()
+     } else if(gender === 'Boys') {
+         productPage.SizeBoys.click()
+     }
+
 }
  function addInBuyBox() {
      productPage.BuyBox.click()

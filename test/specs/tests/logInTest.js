@@ -30,7 +30,7 @@ describe('start the flow', () => {
     it('should select an item and add in buyBox',  () => {
         let beforeC =   homePage.returnNumberOfItemsInCart()
          homePage.selectProduct()
-         productPage.selectSize('110')
+         productPage.selectSize('Girls')
          productPage.addInBuyBox()
          browser.pause(3000)
          let actualValue  =  homePage.returnNumberOfItemsInCart()
@@ -50,9 +50,9 @@ describe('start the flow', () => {
     it('should select  a T-SHIRT and add in buyBox', () => {
         let beforeC =   homePage.returnNumberOfItemsInCart()
         homePage.selectProduct()
-        productPage.selectSize('140')
+        productPage.selectSize('Boys')
         productPage.addInBuyBox()
-        browser.pause(5000)
+        browser.pause(3000)
         let actualValue = homePage.returnNumberOfItemsInCart()
         assert.equal(beforeC + 1,  actualValue)
     })
