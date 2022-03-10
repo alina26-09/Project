@@ -8,15 +8,24 @@ exports.config = {
     //         './test/specs/tests/logInTest.js'
     //     ],
     // },
+    user: 'AlinaIftode',
+    key: '1384c9d8-490e-4be8-983e-b359161308eb',
+    capabilities: [{
+        browserName: 'chrome',
+        browserVersion: 'latest',
+        platformName: 'Windows 10',
+        'sauce:options': {
+            screenResolution: '1920x1080',
+            //name: 'LoginTest',
+            idleTimeout: 1000,
+        }
+    }],
+    region: 'eu',
     specs: ['./test/specs/**/logInTest.js'],
-    runner: 'local',
+    // runner: 'local',
     sync: true,
     pageLoadStrategy: 'normal',
     maxInstances: 20,
-    capabilities: [{
-        maxInstances: 20,
-        browserName: 'chrome'
-    }],
     logLevel: 'error',
     deprecationWarnings: true,
     waitForTimeout: 200000,
@@ -28,7 +37,6 @@ exports.config = {
         ['junit', {
             outputDir: './report'
         }]],
-    services: [['selenium-standalone']],
 
     before: function (capabilities, specs) {
         global.assert = chai.assert;

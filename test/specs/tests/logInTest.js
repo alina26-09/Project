@@ -2,9 +2,10 @@ const loginPage = require('../pageDefinition/loginPageFlow')
 const homePage = require('../pageDefinition/homePageFlow')
 const homePageComponents = require('../pagesComponents/homePage')
 const productPage = require('../pageDefinition/productPageFlow')
+const cartPage = require('../pageDefinition/cartPageFlow')
 const productComponents = require('../pagesComponents/productPage')
 const waitUntil = require("webdriverio/build/commands/browser/waitUntil");
-
+let initialNumberOfElemInCart ;
 describe('start the flow', () => {
 
     it('open emag page',  () => {
@@ -12,6 +13,7 @@ describe('start the flow', () => {
     });
 
     it('should login in the app',  () =>{
+        initialNumberOfElemInCart = homePage.returnNumberOfItemsInCart()
          console.log("0--> log IN")
          homePage.logIn()
          loginPage.loginWithEmail()
@@ -57,7 +59,19 @@ describe('start the flow', () => {
         assert.equal(beforeC + 1,  actualValue)
     })
 
-    // testing jenkins
+    it ('should delete items in cart', () => {
+        homePageComponents.CustomerBasket.click();
+        browser.waitUntil(function() {
+            return (browser.getTitle()).trim() === 'Fashion Days - Cosul Meu'
+        }, 6000, "not loaded")
+        cartPage.DeleteElementFromCart();
+        browser.pause(1000)
+        cartPage.DeleteElementFromCart();
+        browser.pause(1000)
+        let actualValue  =  homePage.returnNumberOfItemsInCart()
+        assert.equal(initialNumberOfElemInCart,  actualValue)
+    });
+
 
     after(function () {
         if (this.currentTest.state === 'failed')

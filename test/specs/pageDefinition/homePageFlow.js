@@ -24,15 +24,20 @@ let initialNumber = 0;
 }
 
 function selectProduct() {
-    homeItems.getProduct.scrollIntoView()
-    homeItems.getProduct.click()
+     let elem = homeItems.getProduct
+    elem.scrollIntoView()
+    elem.click()
 }
 
  function returnNumberOfItemsInCart() {
     //homeItems.prodCartCountHeader.waitForDisplayed(8000)
     let count = parseInt( homeItems.prodCartCountHeader.getText())
     console.log('---->COUNT', count)
-    return count
+     if(isNaN(count)) {
+         return 0;
+     } else {
+         return count
+     }
 }
 
 module.exports = {
